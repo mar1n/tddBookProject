@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.5.0",
     "react": "^18.2.0",
@@ -20,6 +19,12 @@
     "cypress:open": "cypress open",
     "e2e": "cypress run",
     "stub-server": "json-server --watch db.json --port 8080"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|ts)$": "babel-jest"
+    },
+    "transformIgnorePatterns": []
   },
   "eslintConfig": {
     "extends": [
@@ -40,6 +45,11 @@
     ]
   },
   "devDependencies": {
+    "@babel/core": "^7.22.11",
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@babel/preset-env": "^7.22.10",
+    "@testing-library/react": "^14.0.0",
+    "babel-jest": "^29.6.4",
     "cypress": "^12.17.4",
     "eslint-plugin-cypress": "^2.14.0",
     "json-server": "^0.17.3"
