@@ -1,15 +1,18 @@
 import React from "react";
 
-const BookList = ({loading, books}) => {
+const BookList = ({loading, error, books}) => {
   if(loading) {
     return <p>LOADING...</p>
   }
+  if(error) {
+    return <p>ERROR...</p>
+  }
   return (
     <div data-test='book-list'>
-      {books.map((item) => {
+      {books.map((item, index) => {
         return (
-          <div className='book-item'>
-            <h2 className='title'>{item.name}</h2>
+          <div className='book-item' key={item.id}>
+            <h2 className='title'  data-testid="title-item">{item.name}</h2>
           </div>
         );
       })}
