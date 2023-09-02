@@ -3,7 +3,7 @@ import BookList from "./BookList";
 import { useRemoteService } from "./hooks";
 
 const BookListContainer = () => {
-    const { data, loading, error } = useRemoteService([]);
+    const { data, loading, error } = useRemoteService(`http://localhost:8080/books`,[]);
     
     if(loading) {
         return <p>LOADING...</p>
