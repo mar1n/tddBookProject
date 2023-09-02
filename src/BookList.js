@@ -9,10 +9,11 @@ const BookList = ({loading, error, books}) => {
   }
   return (
     <div data-test='book-list'>
-      {books.map((item, index) => {
+      {books.map((book) => {
         return (
-          <div className='book-item' key={item.id}>
-            <h2 className='title'  data-testid="title-item">{item.name}</h2>
+          <div className='book-item' key={book.id}>
+            <h2 className='book-title'  data-testid="title-item">{book.name}</h2>
+            <a href={`/books/${book.id}`}>View Details</a>
           </div>
         );
       })}
