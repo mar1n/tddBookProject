@@ -1,8 +1,9 @@
 import "./App.css";
-import BookListContainer from "./BookListContainer";
 import { Route, Routes } from "react-router-dom";
-import BookDetailContainer from "./BookDetailContainer";
 import { BrowserRouter as Router } from "react-router-dom";
+import BookListContainer from "./BookList/BookListContainer";
+import BookDetailContainer from "./BookDetails/BookDetailContainer";
+
 function App() {
   return (
     <Router>
