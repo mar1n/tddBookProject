@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-
 import BookList from "./BookList";
+import { BrowserRouter } from "react-router-dom";
 
 describe("BookList", () => {
   it("loading", () => {
@@ -27,7 +27,7 @@ describe("BookList", () => {
         { name: "Domain-driven design", id: 2 },
       ],
     };
-    render(<BookList {...props} />);
+    render(<BrowserRouter> <BookList {...props} /> </BrowserRouter> );
     
     const titleItemList = screen.getAllByTestId("title-item");
     const titles = [...titleItemList].map(x => x.textContent);
