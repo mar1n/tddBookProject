@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import BookList from "./BookList";
 import { useRemoteService } from "../hooks";
-import { TextField } from "@mui/material";
+import SearchBox from "./SearchBox";
 
 const BookListContainer = () => {
     const [term, setTerm] = useState('');
@@ -12,15 +12,12 @@ const BookListContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [term]);
   
+    const onSearch = (event) => {
+      console.log('event')
+      setTerm(event.target.value)
+    };
     return (<>
-      <TextField
-        label="Search"
-        value={term}
-        data-test="search"
-        onChange={(e) => setTerm(e.target.value)}
-        margin="normal"
-        variant="outlined"
-      />
+      <SearchBox term={term} onSearch={onSearch} />
       <BookList books={data} loading={loading} error={error}/>
     </>);
   }
