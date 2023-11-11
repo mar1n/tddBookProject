@@ -13,6 +13,7 @@ const SearchBox = ({term, onSearch}) => {
     }
     return(
         <TextField
+        inputProps={{ 'aria-label': 'Search' }}
         label="Search"
         value={term}
         data-test="search"

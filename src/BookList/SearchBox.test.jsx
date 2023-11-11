@@ -11,9 +11,10 @@ describe("SearchBox", () => {
       onSearch: jest.fn(),
     };
     render(<SearchBox {...props} />);
-    const element = screen.getByTestId("search");
+    const element = screen.getByRole("textbox");
 
-    await userEvent.type(element, "Domain");
+    userEvent.type(element, "Domain");
+    
     expect(props.onSearch).toHaveBeenCalled();
   });
   it("trim empty strings", () => {
@@ -23,7 +24,7 @@ describe("SearchBox", () => {
     };
 
     render(<SearchBox {...props} />);
-    const input = screen.getByTestId("search");
+    const input = screen.getByRole("textbox");
     userEvent.type(input, " ");
 
     expect(props.onSearch).not.toHaveBeenCalled();
