@@ -22,30 +22,72 @@ describe("BookListContainer related actions", () => {
       { id: 2, name: "Domain-driven design" },
     ];
 
-    axios.get = jest.fn().mockImplementation(() => Promise.resolve({ data: books}));
+    axios.get = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve({ data: books }));
 
     const expectedActions = [
-        { type: 'FETCH_BOOKS_PENDING'},
-        { type: 'FETCH_BOOKS_SUCCESS', books}
+      { type: "FETCH_BOOKS_PENDING" },
+      { type: "FETCH_BOOKS_SUCCESS", books },
     ];
 
     const store = mockStore({ books: [] });
 
-    return store.dispatch(fetchBooks('')).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-    })
+    return store.dispatch(fetchBooks("")).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
-  test('Fetch data with error ', () => {
-    axios.get = jest.fn().mockImplementation(() => Promise.reject({ message: 'Something went wrong'}))
+  test("Fetch data with error", () => {
+    axios.get = jest
+      .fn()
+      .mockImplementation(() =>
+        Promise.reject({ message: "Something went wrong" })
+      );
 
     const expectedActions = [
-        { type: 'FETCH_BOOKS_PENDING'},
-        { type: 'FETCH_BOOKS_FAILED', err: 'Something went wrong'}
-    ]
+      { type: "FETCH_BOOKS_PENDING" },
+      { type: "FETCH_BOOKS_FAILED", err: "Something went wrong" },
+    ];
     const store = mockStore({ books: [] });
 
-    return store.dispatch(fetchBooks('')).then(() => {
-        expect(store.getActions()).toEqual(expectedActions);
-    })
+    return store.dispatch(fetchBooks("")).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+  test("Search data with term", () => {
+    const books = [
+      { id: 1, name: "Refactoring" },
+      { id: 2, name: "Domain-driven design" },
+    ];
+    axios.get = jest
+      .fn()
+      .mockImplementation(() => Promise.resolve({ data: books }));
+    const store = mockStore({ books: [], term: "domain" });
+    return store.dispatch(fetchBooks()).then(() => {
+      expect(axios.get).toHaveBeenCalledWith(
+        "http://localhost:8080/books?q=domain"
+      );
+    });
+  });
+  test("Preforms a search", () => {
+    const books = [
+      { id: 1, name: "Refactoring" },
+      { id: 2, name: "Domain-driven design" },
+    ];
+    axios.get = jest
+    .fn()
+    .mockImplementation(() => Promise.resolve({ data: books }));
+    const store = mockStore({ books: [], term: 'domain'});
+    store.dispatch(setSearchTerm("domain"));
+    
+
+    return store.dispatch(fetchBooks()).then(() => {
+      const state = store.getState();
+      console.log("state", state);
+      expect(state.term).toEqual("domain");
+      expect(axios.get).toHaveBeenCalledWith(
+        "http://localhost:8080/books?q=domain"
+      );
+    });
   });
 });
