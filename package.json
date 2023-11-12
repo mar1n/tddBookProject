@@ -65,6 +65,7 @@
     "eslint-plugin-cypress": "^2.14.0",
     "json-server": "^0.17.3",
     "lodash.clone": "^4.5.0",
-    "lodash.isempty": "^4.4.0"
+    "lodash.isempty": "^4.4.0",
+    "redux-mock-store": "^1.5.4"
   }
 }
