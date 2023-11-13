@@ -5,7 +5,7 @@ const reducer = (state = [], action) => {
         case types.FETCH_BOOKS_PENDING:
             return { ...state, loading: true}
         case types.FETCH_BOOKS_SUCCESS:
-            return { books: action.books};
+            return {...state, books: action.books};
         case types.SET_SEARCH_TERM:
             return {...state, term: action.term}
         default:

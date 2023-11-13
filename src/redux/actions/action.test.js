@@ -63,7 +63,7 @@ describe("BookListContainer related actions", () => {
       .fn()
       .mockImplementation(() => Promise.resolve({ data: books }));
     const store = mockStore({ books: [], term: "domain" });
-    return store.dispatch(fetchBooks()).then(() => {
+    return store.dispatch(fetchBooks("domain")).then(() => {
       expect(axios.get).toHaveBeenCalledWith(
         "http://localhost:8080/books?q=domain"
       );
@@ -81,7 +81,7 @@ describe("BookListContainer related actions", () => {
     store.dispatch(setSearchTerm("domain"));
     
 
-    return store.dispatch(fetchBooks()).then(() => {
+    return store.dispatch(fetchBooks("domain")).then(() => {
       const state = store.getState();
       console.log("state", state);
       expect(state.term).toEqual("domain");
